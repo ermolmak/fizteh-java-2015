@@ -8,7 +8,7 @@ public class SearchTweets {
     private static final long MILLIS_IN_SECOND = 1000L;
     private static final long MILLIS_IN_MINUTE = 60_000L;
     private static final long MILLIS_IN_HOUR = 3_600_000L;
-    private static final long MILLIS_IN_DAY = 3600L * 24L * 1000L;
+    private static final long MILLIS_IN_DAY = MILLIS_IN_HOUR * 24;
 
     List<String> searchTweets(String stringQuery,
                               String place,
@@ -72,15 +72,17 @@ public class SearchTweets {
                 result = milliseconds / MILLIS_IN_HOUR + " часов назад";
             }
         } else {
-            long tweetDayMillis = tweetTime.get(Calendar.HOUR) * MILLIS_IN_HOUR
-                    + tweetTime.get(Calendar.MINUTE) * MILLIS_IN_MINUTE
-                    + tweetTime.get(Calendar.SECOND) * MILLIS_IN_SECOND
-                    + tweetTime.get(Calendar.MILLISECOND);
-            long currentDayMillis = now.get(Calendar.HOUR) * MILLIS_IN_HOUR
-                    + now.get(Calendar.MINUTE) * MILLIS_IN_MINUTE
-                    + now.get(Calendar.SECOND) * MILLIS_IN_SECOND
-                    + now.get(Calendar.MILLISECOND);
-            long days = (milliseconds - currentDayMillis + tweetDayMillis) / MILLIS_IN_DAY;
+            tweetTime.set(Calendar.HOUR_OF_DAY, 0);
+            tweetTime.set(Calendar.MINUTE, 0);
+            tweetTime.set(Calendar.SECOND, 0);
+            tweetTime.set(Calendar.MILLISECOND, 0);
+
+            now.set(Calendar.HOUR_OF_DAY, 0);
+            now.set(Calendar.MINUTE, 0);
+            now.set(Calendar.SECOND, 0);
+            now.set(Calendar.MILLISECOND, 0);
+
+            long days = (now.getTimeInMillis() - tweetTime.getTimeInMillis()) / MILLIS_IN_DAY;
 
             if (days == 1) {
                 result = "Вчера";
