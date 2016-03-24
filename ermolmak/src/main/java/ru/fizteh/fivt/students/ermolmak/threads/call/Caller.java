@@ -1,12 +1,12 @@
 package ru.fizteh.fivt.students.ermolmak.threads.call;
 
 class Caller implements Runnable {
-    private int numberOfThreads;
-    private boolean answers[];
+    private final int numberOfThreads;
+    private final boolean[] answers;
+    private final Object monitor;
     private Turn turn;
     private int unansweredThreads;
     private int yesCounter;
-    private Object monitor;
 
     Caller(int numberOfThreads) {
         this.numberOfThreads = numberOfThreads;
@@ -50,10 +50,13 @@ class Caller implements Runnable {
         }
     }
 
-    private enum Turn {MAIN_THREAD, CHILD_THREAD}
+    private enum Turn {
+        MAIN_THREAD,
+        CHILD_THREAD
+    }
 
     private class ChildThread implements Runnable {
-        private int myNumber;
+        private final int myNumber;
 
         ChildThread(int myNumber) {
             this.myNumber = myNumber;
