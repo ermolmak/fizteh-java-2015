@@ -42,10 +42,9 @@
 		<module>Jettriangle</module>
         <module>nmakeenkov</module>
         <!--Add you module here-->
-	<module>oshch</module>
+	    <module>oshch</module>
         <module>ladyae</module>
-	<module>ermolmak</module>
-    	<module>preidman</module>
+	    <module>ermolmak</module>
     	<module>nikitarykov</module>
     	<module>duha666</module>
   </modules>
