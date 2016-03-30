@@ -2,9 +2,7 @@ package ru.fizteh.fivt.students.ermolmak.twitterstream;
 
 import twitter4j.*;
 
-import java.io.IOException;
 import java.util.*;
-import java.util.function.Consumer;
 
 public class SearchTweets {
     private static final long MILLIS_IN_SECOND = 1000L;
